@@ -1,9 +1,9 @@
-"use client";
-import { useState } from "react";
-import Link from "next/link";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
 
-import CartPopup from "./CartPopup";
-import { type Cart } from "@/api/types";
+import CartPopup from './CartPopup';
+import type { Cart } from '@/api/types';
 
 export default function Header({
   cart,
@@ -14,6 +14,10 @@ export default function Header({
 }) {
   const [showCart, setShowCart] = useState(false);
 
+  const productsCount = cart.products.length;
+
+  const toggleCart = () => setShowCart(prev => !prev);
+
   return (
     <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">
       <Link href="/">
@@ -23,12 +27,10 @@ export default function Header({
       </Link>
       <div
         className="flex items-center justify-center w-10 h-10 bg-blue-700 rounded-full"
-        onClick={() => {
-          setShowCart(!showCart);
-        }}
+        onClick={toggleCart}
       >
         <span className="text-xl font-bold leading-10 text-gray-100">
-          {cart.products.length}
+          {productsCount}
         </span>
         {showCart && (
           <CartPopup cart={cart} clearCartAction={clearCartAction} />

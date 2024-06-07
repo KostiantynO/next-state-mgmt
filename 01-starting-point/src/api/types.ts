@@ -12,11 +12,8 @@ export interface Product {
   reviews: Review[];
 }
 
+type PartialProduct = Pick<Product, 'id' | 'name' | 'image' | 'price'>;
+
 export interface Cart {
-  products: {
-    id: number;
-    name: string;
-    image: string;
-    price: number;
-  }[];
+  products: PartialProduct[];
 }

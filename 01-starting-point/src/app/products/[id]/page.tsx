@@ -19,7 +19,8 @@ export default async function ProductDetail({
 }: {
   params: { id: string };
 }) {
-  const product = await getProductById(+id);
+  const productId = Number(id)
+  const product = await getProductById(productId);
   const products = await getProducts();
 
   if (!product) {
@@ -28,11 +29,11 @@ export default async function ProductDetail({
 
   const addToCartAction = async () => {
     "use server";
-    return await addToCart(+id);
+    return await addToCart(productId);
   };
   const addReviewAction = async (text: string, rating: number) => {
     "use server";
-    const reviews = await addReview(+id, { text, rating });
+    const reviews = await addReview(productId, { text, rating });
     revalidatePath(`/products/${id}`);
     return reviews || [];
   };
@@ -73,7 +74,7 @@ export default async function ProductDetail({
         <h1 className="text-2xl font-bold mt-2 -mb-2">Related Products</h1>
         <ul role="list" className="flex flex-row flex-wrap m-2">
           {products
-            .filter((p) => p.id !== +id)
+            .filter((p) => p.id !== productId)
             .map((product) => (
               <li key={product.id} className="md:w-1/5">
                 <Link href={`/products/${product.id}`}>
