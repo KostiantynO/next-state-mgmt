@@ -1,41 +1,45 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
-import CartPopup from './CartPopup';
+import { CartPopup } from './CartPopup';
+
 import type { Cart } from '@/api/types';
 
-export default function Header({
+export const Header = ({
   cart,
   clearCartAction,
 }: {
   cart: Cart;
   clearCartAction: () => Promise<Cart>;
-}) {
+}) => {
   const [showCart, setShowCart] = useState(false);
 
   const productsCount = cart.products.length;
 
   const toggleCart = () => setShowCart(prev => !prev);
 
+  const cartPopup = showCart && (
+    <CartPopup cart={cart} clearCartAction={clearCartAction} />
+  );
+
   return (
-    <header className="mx-2 flex items-center justify-between p-4 bg-blue-800 mb-10 shadow-lg shadow-white rounded-b-2xl">
+    <header className="mx-2 mb-10 flex items-center justify-between rounded-b-2xl bg-blue-800 p-4 shadow-lg shadow-white">
       <Link href="/">
         <h1 className="text-3xl font-bold leading-10 text-gray-100">
           Donuts &amp; Dragoons Store
         </h1>
       </Link>
-      <div
-        className="flex items-center justify-center w-10 h-10 bg-blue-700 rounded-full"
+
+      <button
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-700"
         onClick={toggleCart}
       >
         <span className="text-xl font-bold leading-10 text-gray-100">
           {productsCount}
         </span>
-        {showCart && (
-          <CartPopup cart={cart} clearCartAction={clearCartAction} />
-        )}
-      </div>
+        {cartPopup}
+      </button>
     </header>
   );
-}
+};

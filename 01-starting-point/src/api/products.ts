@@ -1,13 +1,13 @@
-import { Product, Review } from "./types";
+import type { Product, Review } from './types';
 
 const products = [
   {
     id: 1,
-    image: "/castle-t-shirt.jpg",
-    name: "Castle T-Shirt",
+    image: '/castle-t-shirt.jpg',
+    name: 'Castle T-Shirt',
     price: 25,
     description:
-      "Beware the castle of the blue wizard of Bazmagar! It is said that he has a dragon!",
+      'Beware the castle of the blue wizard of Bazmagar! It is said that he has a dragon!',
     reviews: [
       {
         rating: 5,
@@ -21,29 +21,29 @@ const products = [
   },
   {
     id: 2,
-    image: "/dragon-t-shirt.jpg",
-    name: "Dragon T-Shirt",
+    image: '/dragon-t-shirt.jpg',
+    name: 'Dragon T-Shirt',
     price: 25,
     description:
-      "This dragon is not to be trifled with, his fire has burned many enemies to ash!",
+      'This dragon is not to be trifled with, his fire has burned many enemies to ash!',
     reviews: [
       {
         rating: 5,
-        text: "I love this t-shirt! The dragon design is awesome and the material is high-quality.",
+        text: 'I love this t-shirt! The dragon design is awesome and the material is high-quality.',
       },
       {
         rating: 5,
-        text: "This is my new favorite t-shirt! The dragon design is so cool and the fit is perfect.",
+        text: 'This is my new favorite t-shirt! The dragon design is so cool and the fit is perfect.',
       },
     ],
   },
   {
     id: 3,
-    image: "/elf-t-shirt.jpg",
-    name: "Elf T-Shirt",
+    image: '/elf-t-shirt.jpg',
+    name: 'Elf T-Shirt',
     price: 25,
     description:
-      "This fierce elf is ready to take on any foe, with her trusty bow and arrow!",
+      'This fierce elf is ready to take on any foe, with her trusty bow and arrow!',
     reviews: [
       {
         rating: 4,
@@ -57,15 +57,15 @@ const products = [
   },
   {
     id: 4,
-    image: "/wizard-t-shirt.jpg",
-    name: "Wizard T-Shirt",
+    image: '/wizard-t-shirt.jpg',
+    name: 'Wizard T-Shirt',
     price: 25,
     description:
       "This wizard is ready to cast a spell on you, and it won't be a good one!",
     reviews: [
       {
         rating: 5,
-        text: "This t-shirt is awesome! The wizard design is so cool and the material is high-quality.",
+        text: 'This t-shirt is awesome! The wizard design is so cool and the material is high-quality.',
       },
       {
         rating: 4,
@@ -75,11 +75,11 @@ const products = [
   },
   {
     id: 5,
-    image: "/wizard-t-shirt-2.jpg",
-    name: "Wizard T-Shirt ][",
+    image: '/wizard-t-shirt-2.jpg',
+    name: 'Wizard T-Shirt ][',
     price: 25,
     description:
-      "The wizard is powerful and knows many dangerous spells, beware traveller!",
+      'The wizard is powerful and knows many dangerous spells, beware traveller!',
     reviews: [
       {
         rating: 5,
@@ -87,17 +87,17 @@ const products = [
       },
       {
         rating: 5,
-        text: "I love this t-shirt! The wizard design is so cool and the fit is perfect. I wear it all the time.",
+        text: 'I love this t-shirt! The wizard design is so cool and the fit is perfect. I wear it all the time.',
       },
     ],
   },
   {
     id: 6,
-    image: "/barbarian-t-shirt.jpg",
-    name: "Barbarian T-Shirt",
+    image: '/barbarian-t-shirt.jpg',
+    name: 'Barbarian T-Shirt',
     price: 25,
     description:
-      "This barbarian is ready to take on any foe, with his trusty broadsword!",
+      'This barbarian is ready to take on any foe, with his trusty broadsword!',
     reviews: [
       {
         rating: 4,
@@ -130,4 +130,4 @@ export const addReview = async (
 export const getProductById = async (
   id: number
 ): Promise<Product | undefined> =>
-  getProducts().then((products) => products.find((p) => p.id === id));
+  getProducts().then(productsArr => productsArr.find(p => p.id === id));

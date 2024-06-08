@@ -1,10 +1,12 @@
-import './globals.css';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import Header from './components/Header';
+import { clearCart, getCart } from '@/api/cart';
 
-import { getCart, clearCart } from '@/api/cart';
+import { Header } from './components/Header';
+import './globals.css';
+
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,7 +20,7 @@ export const dynamic = 'force-dynamic';
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const cart = await getCart();
 

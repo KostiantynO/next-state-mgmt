@@ -1,26 +1,25 @@
-import { getProductById } from "./products";
-import { Cart } from "./types";
+import { getProductById } from './products';
+
+import type { Cart } from './types';
 
 const cart: Cart = {
   products: [
     {
       id: 1,
-      name: "Castle T-Shirt",
-      image: "/castle-t-shirt.jpg",
+      name: 'Castle T-Shirt',
+      image: '/castle-t-shirt.jpg',
       price: 25,
     },
     {
       id: 2,
-      name: "Dragon T-Shirt",
-      image: "/dragon-t-shirt.jpg",
+      name: 'Dragon T-Shirt',
+      image: '/dragon-t-shirt.jpg',
       price: 25,
     },
   ],
 };
 
-export const getCart = async (): Promise<Cart> => {
-  return cart;
-};
+export const getCart = async (): Promise<Cart> => cart;
 
 export const addToCart = async (productId: number): Promise<Cart> => {
   const product = await getProductById(productId);
