@@ -6,10 +6,10 @@ import { notFound } from 'next/navigation';
 import { addToCart } from '@/api/cart';
 import { getProductById, getProducts } from '@/api/products';
 import { addReview } from '@/api/products';
-import AddToCart from '@/app/components/AddToCart';
+import { AddToCart } from '@/app/components/AddToCart';
 import { ProductCard } from '@/app/components/ProductCard';
 
-import AverageRating from './components/AverageRating';
+import { AverageRating } from './components/AverageRating';
 import { Reviews } from './components/Reviews';
 
 export const dynamic = 'force-dynamic';
