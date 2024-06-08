@@ -10,7 +10,7 @@ import AddToCart from '@/app/components/AddToCart';
 import { ProductCard } from '@/app/components/ProductCard';
 
 import AverageRating from './components/AverageRating';
-import Reviews from './components/Reviews';
+import { Reviews } from './components/Reviews';
 
 export const dynamic = 'force-dynamic';
 
