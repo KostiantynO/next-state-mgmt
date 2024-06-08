@@ -63,7 +63,6 @@ const eslintConfig = {
         },
       },
     ],
-    'arrow-body-style': 'warn',
     'no-shadow': 'error',
   },
 };
