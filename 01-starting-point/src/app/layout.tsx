@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 
-import { clearCart } from '@/api/cart';
+import { clearCart, getCart } from '@/api/cart';
 
 import { CartProvider } from './components/CartContext';
 import { Header } from './components/Header';
@@ -23,6 +23,8 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
+  const cart = await getCart();
+
   const clearCartAction = async () => {
     'use server';
     return await clearCart();
@@ -31,7 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
+        <CartProvider initialCart={cart}>
           <Header clearCartAction={clearCartAction} />
           <main className="mx-auto max-w-3xl">{children}</main>
         </CartProvider>
