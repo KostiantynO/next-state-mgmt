@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { useCart } from './CartContext';
 import { CartPopup } from './CartPopup';
+import { useCart } from '../store/cartSlice';
 
 import type { Cart } from '@/api/types';
 
@@ -13,7 +13,7 @@ export const Header = ({
   clearCartAction: () => Promise<Cart>;
 }) => {
   const [showCart, setShowCart] = useState(false);
-  const [cart] = useCart();
+  const cart = useCart();
 
   const productsCount = cart.products.length;
 

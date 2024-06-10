@@ -51,4 +51,6 @@ ea -D @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier pretti
 pnpm remove @types/node @types/react @types/react-dom eslint eslint-config-next postcss typescript tailwindcss autoprefixer
 
 ea -D @types/node @types/react @types/react-dom @types/eslint@8 eslint@8 eslint-config-next@13 postcss typescript tailwindcss autoprefixer
+
+ea redux react-redux @reduxjs/toolkit
 ```
