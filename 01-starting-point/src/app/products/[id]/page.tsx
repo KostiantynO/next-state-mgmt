@@ -11,6 +11,7 @@ import { ProductCard } from '@/app/components/ProductCard';
 
 import { AverageRating } from './components/AverageRating';
 import { Reviews } from './components/Reviews';
+import { ReviewsProvider } from './components/ReviewsContext';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,57 +34,75 @@ export default async function ProductDetail({
   };
   const addReviewAction = async (text: string, rating: number) => {
     'use server';
-    const reviews = await addReview(productId, { text, rating });
+    const updatedReviews = await addReview(productId, { text, rating });
     revalidatePath(`/products/${id}`);
-    return reviews ?? [];
+    return updatedReviews ?? [];
   };
 
+  const { reviews, image, price, name, description } = product;
+
+  const imageSrc = image ?? '';
+  const imageAlt = `${name} image`;
+  const productPrice = price.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  const relatedProductsList = products
+    .filter(p => p.id !== productId)
+    .map(productObj => (
+      <li key={productObj.id} className="md:w-1/5">
+        <Link href={`/products/${productObj.id}`}>
+          <ProductCard {...productObj} small />
+        </Link>
+      </li>
+    ));
+
   return (
-    <div className="flex flex-wrap">
-      <div className="w-full md:w-1/2">
-        <Image
-          className="aspect-[2/2] rounded-md object-cover"
-          src={product.image ?? ''}
-          alt={`${product.name} image`}
-          width={1024}
-          height={1024}
-        />
-      </div>
-      <div className="w-full p-5 md:w-1/2">
-        <h1 className="text-3xl font-bold leading-10 text-gray-100">
-          {product.name}
-        </h1>
-        <div className="text-md my-1 leading-5 text-gray-300">
-          {product.price.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          })}
+    <ReviewsProvider initReviews={reviews}>
+      <div className="flex flex-wrap">
+        <div className="w-full md:w-1/2">
+          <Image
+            className="aspect-[2/2] rounded-md object-cover"
+            src={imageSrc}
+            alt={imageAlt}
+            width={1024}
+            height={1024}
+            priority
+          />
         </div>
-        <div className="mt-1 text-sm font-light italic leading-5 text-gray-300">
-          {product.description}
+
+        <div className="w-full p-5 md:w-1/2">
+          <h1 className="text-3xl font-bold leading-10 text-gray-100">
+            {name}
+          </h1>
+
+          <div className="text-md my-1 leading-5 text-gray-300">
+            {productPrice}
+          </div>
+
+          <div className="mt-1 text-sm font-light italic leading-5 text-gray-300">
+            {description}
+          </div>
+
+          <AverageRating />
+
+          <div className="flex justify-end">
+            <AddToCart addToCartAction={addToCartAction} />
+          </div>
         </div>
-        <AverageRating reviews={product.reviews} />
-        <div className="flex justify-end">
-          <AddToCart addToCartAction={addToCartAction} />
+
+        <div className="w-full">
+          <Reviews addReviewAction={addReviewAction} />
+        </div>
+
+        <div className="flex w-full flex-wrap gap-2">
+          <h1 className="-mb-2 mt-2 text-2xl font-bold">Related Products</h1>
+          <ul role="list" className="m-2 flex flex-row flex-wrap">
+            {relatedProductsList}
+          </ul>
         </div>
       </div>
-      <div className="w-full">
-        <Reviews reviews={product.reviews} addReviewAction={addReviewAction} />
-      </div>
-      <div className="flex w-full flex-wrap gap-2">
-        <h1 className="-mb-2 mt-2 text-2xl font-bold">Related Products</h1>
-        <ul role="list" className="m-2 flex flex-row flex-wrap">
-          {products
-            .filter(p => p.id !== productId)
-            .map(productObj => (
-              <li key={productObj.id} className="md:w-1/5">
-                <Link href={`/products/${productObj.id}`}>
-                  <ProductCard {...productObj} small />
-                </Link>
-              </li>
-            ))}
-        </ul>
-      </div>
-    </div>
+    </ReviewsProvider>
   );
 }

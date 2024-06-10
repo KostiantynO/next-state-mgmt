@@ -3,13 +3,15 @@ export interface Review {
   text: string;
 }
 
+export type ReviewsArray = Review[];
+
 export interface Product {
   id: number;
   image: string;
   name: string;
   price: number;
   description: string;
-  reviews: Review[];
+  reviews: ReviewsArray;
 }
 
 type PartialProduct = Pick<Product, 'id' | 'name' | 'image' | 'price'>;
