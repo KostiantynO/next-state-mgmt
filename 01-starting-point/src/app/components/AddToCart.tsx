@@ -1,7 +1,9 @@
 'use client';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import { setCart } from '../store/cartSlice';
+// import { setCart } from '../store/cartSlice';
+
+import { selectCartSetter, useCart } from '../store/CartProvider';
 
 import type { Cart } from '@/api/types';
 
@@ -10,11 +12,13 @@ export const AddToCart = ({
 }: {
   addToCartAction: () => Promise<Cart>;
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const setCart = useCart()(selectCartSetter);
 
   const onCLickSetCart = async () => {
     const cartFromServer = await addToCartAction();
-    dispatch(setCart(cartFromServer));
+    // dispatch(setCart(cartFromServer));
+    setCart(cartFromServer);
   };
 
   return (

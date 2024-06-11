@@ -8,10 +8,11 @@ import { getProductById, getProducts } from '@/api/products';
 import { addReview } from '@/api/products';
 import { AddToCart } from '@/app/components/AddToCart';
 import { ProductCard } from '@/app/components/ProductCard';
+import { ReviewsProvider } from '@/app/store/ReviewsProvider';
 
 import { AverageRating } from './components/AverageRating';
 import { Reviews } from './components/Reviews';
-import { ReviewsProvider } from './components/ReviewsContext';
+// import { ReviewsProvider } from './components/ReviewsContext';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,7 +60,7 @@ export default async function ProductDetail({
     ));
 
   return (
-    <ReviewsProvider initReviews={reviews}>
+    <ReviewsProvider initialReviews={reviews}>
       <div className="flex flex-wrap">
         <div className="w-full md:w-1/2">
           <Image

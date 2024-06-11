@@ -17,13 +17,13 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setCart: (state, action: PayloadAction<Cart>) => {
-      state.cart = action.payload;
+    setCart: (state, { payload }: PayloadAction<Cart>) => {
+      state.cart = payload;
     },
   },
 });
 
-export const cartSliceReducer = cartSlice.reducer;
+export const cartReducer = cartSlice.reducer;
 export const { setCart } = cartSlice.actions;
 
 const selectCart = (state: RootState) => state.cart.cart;

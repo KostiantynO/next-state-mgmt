@@ -53,4 +53,5 @@ pnpm remove @types/node @types/react @types/react-dom eslint eslint-config-next 
 ea -D @types/node @types/react @types/react-dom @types/eslint@8 eslint@8 eslint-config-next@13 postcss typescript tailwindcss autoprefixer
 
 ea redux react-redux @reduxjs/toolkit
+ea zustand
 ```

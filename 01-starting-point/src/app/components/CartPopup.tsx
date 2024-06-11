@@ -1,7 +1,8 @@
 'use client';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
+// import { setCart, useCart } from '../store/cartSlice';
 
-import { setCart, useCart } from '../store/cartSlice';
+import { useCart } from '../store/CartProvider';
 
 import type { Cart } from '@/api/types';
 
@@ -10,15 +11,16 @@ export const CartPopup = ({
 }: {
   clearCartAction: () => Promise<Cart>;
 }) => {
-  const cart = useCart();
+  const { cart, setCart } = useCart()();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const productsCount = cart.products.length;
 
   const onClickClearCart = async () => {
     const emptyCartFromServer = await clearCartAction();
-    dispatch(setCart(emptyCartFromServer));
+    setCart(emptyCartFromServer);
+    // dispatch(setCart(emptyCartFromServer));
   };
 
   const inCartProductsList = productsCount > 0 && (

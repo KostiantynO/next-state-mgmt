@@ -1,21 +1,37 @@
 'use client';
 
-import { useReviews } from './ReviewsContext';
+// import { useRef } from 'react';
+// import { useStore } from 'react-redux';
+
+// import { setReviews, useReviews } from '@/app/store/reviewsSlice';
+
+import {
+  selectAvgReviewsRatingAndCount,
+  useReviews,
+} from '@/app/store/ReviewsProvider';
+
+// import type { ReviewsArray } from '@/api/types';
+// import type { RootState } from '@/app/store/store';
 
 export const AverageRating = () => {
-  const [reviews] = useReviews();
+  // const store = useStore<RootState>();
+  // const initialized = useRef(false);
 
-  const { length: reviewsCount } = reviews;
+  // if (!initialized.current) {
+  //   store.dispatch(setReviews(initialReviews));
+  //   initialized.current = true;
+  // }
 
-  const avgRating = (
-    reviews.reduce((acc, { rating }) => acc + rating, 0) / reviewsCount
-  ).toFixed(1);
+  // const reviews = useReviews();
+  const { avgRating, reviewsCount } = useReviews()(
+    selectAvgReviewsRatingAndCount
+  );
 
   return (
-    <>
+    <marquee>
       {reviewsCount && (
         <div className="mt-4 font-light">Average Rating: {avgRating}</div>
       )}
-    </>
+    </marquee>
   );
 };

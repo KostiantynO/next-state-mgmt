@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { CartPopup } from './CartPopup';
-import { useCart } from '../store/cartSlice';
+// import { useCart } from '../store/cartSlice';
+import { selectProductsCount, useCart } from '../store/CartProvider';
 
 import type { Cart } from '@/api/types';
 
@@ -12,10 +13,8 @@ export const Header = ({
 }: {
   clearCartAction: () => Promise<Cart>;
 }) => {
+  const productsCount = useCart()(selectProductsCount);
   const [showCart, setShowCart] = useState(false);
-  const cart = useCart();
-
-  const productsCount = cart.products.length;
 
   const toggleCart = () => setShowCart(prev => !prev);
 
@@ -29,7 +28,7 @@ export const Header = ({
         </h1>
       </Link>
 
-      <button
+      <div
         className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-700"
         onClick={toggleCart}
       >
@@ -37,7 +36,7 @@ export const Header = ({
           {productsCount}
         </span>
         {cartPopup}
-      </button>
+      </div>
     </header>
   );
 };

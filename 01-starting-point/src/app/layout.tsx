@@ -4,7 +4,8 @@ import { clearCart, getCart } from '@/api/cart';
 
 import { Header } from './components/Header';
 import './globals.css';
-import { StoreProvider } from './store/StoreProvider';
+// import { StoreProvider } from './store/StoreProvider';
+import { CartProvider } from './store/CartProvider';
 
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
@@ -33,14 +34,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StoreProvider initialCart={cart}>
-          {/* <CartProvider initialCart={cart}> */}
-
+        {/* <StoreProvider initialCart={cart}> */}
+        <CartProvider initialCart={cart}>
           <Header clearCartAction={clearCartAction} />
           <main className="mx-auto max-w-3xl">{children}</main>
-
-          {/* </CartProvider> */}
-        </StoreProvider>
+        </CartProvider>
+        {/* </StoreProvider> */}
       </body>
     </html>
   );
